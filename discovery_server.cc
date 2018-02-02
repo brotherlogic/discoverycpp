@@ -20,11 +20,45 @@ using discovery::DiscoveryService;
 
 class DiscoveryImpl final : public DiscoveryService::Service {
  public:
+  std::map<std::string, RegistryEntry*> masterMap;
+  std::map<std::string, std::list<RegistryEntry*>> slaveMap;
   explicit DiscoveryImpl() {
   }
 
   Status RegisterService(ServerContext* context, const RegistryEntry* entryIn,
 			 RegistryEntry* entryOut) override {
+    // This server is already registered - update the last seen time
+    if (entryIn->port() > 0) {
+      if (entryIn->master()) {
+	RegistryEntry* entry = masterMap[entryIn->name()];
+	if (entry->ip() == entryIn->ip() && entry->port() == entryIn->port()) {
+	  entry->set_last_seen_time(static_cast<std::int64_t>(time(0)));
+	  entryOut = entry;
+	  return Status::OK;
+	} else {
+	  return Status::Status(grpc::INVALID_ARGUMENT, "There is already a master for this service");
+	}
+      } else {
+	std::list<RegistryEntry*> entries = slaveMap[entryIn->name()];
+	for (RegistryEntry* entry : entries) {
+	  if (entry->ip() == entryIn->ip() && entry->port() == entryIn->port()) {
+	    entry->set_last_seen_time(static_cast<std::int64_t>(time(0)));
+	    entryOut = entry;
+	    return Status::OK;
+	  }
+
+	  return Status::Status(grpc::INVALID_ARGUMENT, "Unable to locate this service - please re-register");
+	}
+      }
+    }
+
+    // This server is not registered
+    if (entryIn->master()) {
+      return Status::Status(grpc::INVALID_ARGUMENT, "Unable to register as master");
+    }
+    
+    
+    
     return Status::CANCELLED;
   }
 

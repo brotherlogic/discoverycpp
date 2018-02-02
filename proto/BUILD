@@ -6,5 +6,4 @@ cc_proto_library(
     name = "discovery_server_proto",
     protos = ["discovery.proto"],
     with_grpc = True,
-    verbose = 2,
 )

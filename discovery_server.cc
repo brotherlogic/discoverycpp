@@ -22,7 +22,34 @@ class DiscoveryImpl final : public DiscoveryService::Service {
  public:
   std::map<std::string, RegistryEntry*> masterMap;
   std::map<std::string, std::list<RegistryEntry*>> slaveMap;
+  std::map<std::string, int> lastPortUsed;
+  std::map<int, bool> externalPorts;
+  
   explicit DiscoveryImpl() {
+    externalPorts[50052] = true;
+    externalPorts[50053] = true;
+  }
+
+  int getExternalPort() {
+    for (std::map<int, bool>::iterator it=externalPorts.begin(); it != externalPorts.end(); ++it)
+      if (it->second) {
+	externalPorts[it->first] = false;
+	return it->first;
+      }
+
+    return -1;
+  }
+
+  int getInternalPort(std::string identifier) {
+    int value = lastPortUsed[identifier];
+
+    if (value == 0) {
+      lastPortUsed[identifier] = 50055;
+      value = 50055;
+    }
+
+    lastPortUsed[identifier]++;
+    return value;
   }
 
   Status RegisterService(ServerContext* context, const RegistryEntry* entryIn,
@@ -56,10 +83,19 @@ class DiscoveryImpl final : public DiscoveryService::Service {
     if (entryIn->master()) {
       return Status::Status(grpc::INVALID_ARGUMENT, "Unable to register as master");
     }
-    
-    
-    
-    return Status::CANCELLED;
+
+    int portNumber = entryIn->external_port() ? getExternalPort() : getInternalPort(entryIn->identifier());
+
+    // Could we acquire a port
+    if (portNumber < 0) {
+      return Status::Status(grpc::INTERNAL, "Unable to find a free port");
+    }
+
+    entryOut->CopyFrom(*entryIn);
+    entryOut->set_register_time(static_cast<std::int64_t>(time(0)));
+    entryOut->set_port(portNumber); 
+
+    return Status::OK;
   }
 
   Status Discover(ServerContext* context, const RegistryEntry* entryIn,

@@ -63,7 +63,7 @@ class DiscoveryImpl final : public DiscoveryService::Service {
 	  entryOut = entry;
 	  return Status::OK;
 	} else {
-	  return Status::Status(grpc::INVALID_ARGUMENT, "There is already a master for this service");
+	  return Status(grpc::INVALID_ARGUMENT, "There is already a master for this service");
 	}
       } else {
 	std::list<RegistryEntry*> entries = slaveMap[entryIn->name()];
@@ -74,21 +74,21 @@ class DiscoveryImpl final : public DiscoveryService::Service {
 	    return Status::OK;
 	  }
 
-	  return Status::Status(grpc::INVALID_ARGUMENT, "Unable to locate this service - please re-register");
+	  return Status(grpc::INVALID_ARGUMENT, "Unable to locate this service - please re-register");
 	}
       }
     }
 
     // This server is not registered
     if (entryIn->master()) {
-      return Status::Status(grpc::INVALID_ARGUMENT, "Unable to register as master");
+      return Status(grpc::INVALID_ARGUMENT, "Unable to register as master");
     }
 
     int portNumber = entryIn->external_port() ? getExternalPort() : getInternalPort(entryIn->identifier());
 
     // Could we acquire a port
     if (portNumber < 0) {
-      return Status::Status(grpc::INTERNAL, "Unable to find a free port");
+      return Status(grpc::INTERNAL, "Unable to find a free port");
     }
 
     entryOut->CopyFrom(*entryIn);

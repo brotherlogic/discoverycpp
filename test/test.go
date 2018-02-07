@@ -18,7 +18,7 @@ conn, err := grpc.Dial(":50051", grpc.WithInsecure())
 	 defer conn.Close()
 
 	 registry := pbdi.NewDiscoveryServiceClient(conn)
-	 r, err := registry.RegisterService(context.Background(), &pbdi.RegistryEntry{Name: "testing", Identifier: "madeup", Ip: "192.168.1.1"})
+	 r, err := registry.RegisterService(context.Background(), &pbdi.RegistryEntry{Name: "testing", ExternalPort: true, Identifier: "madeup", Ip: "192.168.1.1"})
 
 	 if err != nil {
 	    log.Fatalf("Failure to list: %v", err)

@@ -100,12 +100,29 @@ class DiscoveryImpl final : public DiscoveryService::Service {
 
   Status Discover(ServerContext* context, const RegistryEntry* entryIn,
 		  RegistryEntry* entryOut) override {
-    return Status::CANCELLED;
+    entryOut = masterMap[entryIn->name()];
+    if (entryOut) {
+      return Status::OK;
+    }
+
+    return Status(grpc::INTERNAL, "Unable to locate master");
   }
 
   Status ListAllServices(ServerContext* context, const Empty* empty,
 			 ServiceList* list) override {
-    return Status::CANCELLED;
+    for (std::map<std::string, RegistryEntry*>::iterator it=masterMap.begin(); it != masterMap.end(); ++it) {
+      RegistryEntry* entry = list->add_services();
+      entry->MergeFrom(*it->second);
+    }
+
+    for (std::map<std::string, std::list<RegistryEntry*>>::iterator it = slaveMap.begin(); it != slaveMap.end(); ++it) {
+      for(RegistryEntry* entry : it->second) {
+	RegistryEntry* tEntry = list->add_services();
+	tEntry->MergeFrom(*entry);
+      }
+    }
+
+    return Status::OK;
   }
 
   Status State(ServerContext* context, const StateRequest* request,

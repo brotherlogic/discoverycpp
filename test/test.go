@@ -19,11 +19,22 @@ conn, err := grpc.Dial(":50051", grpc.WithInsecure())
 
 	 registry := pbdi.NewDiscoveryServiceClient(conn)
 	 r, err := registry.RegisterService(context.Background(), &pbdi.RegistryEntry{Name: "testing", ExternalPort: true, Identifier: "madeup", Ip: "192.168.1.1"})
+	 
+	if err != nil {
+	    log.Fatalf("Failure to list: %v", err)
+	}
+
+	log.Printf("HERE = %v\n", r)
+
+	for(true) {
+	 list, err := registry.ListServices(context.Background(), &pbdi.Empty{})
 
 	 if err != nil {
-	    log.Fatalf("Failure to list: %v", err)
-				}
+	 log.Fatalf("WHA: %v", err)
+	}
 
-					log.Printf("HERE = %v\n", r)
+
+	log.Printf("LIST: %v", list)
+}
 
 }

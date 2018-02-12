@@ -1,4 +1,6 @@
 #include <string>
+#include <chrono>
+#include <thread>
 
 #include <grpc/grpc.h>
 #include <grpc++/server.h>
@@ -12,6 +14,12 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
 using discovery::RegistryEntry;
+using discovery::RegisterRequest;
+using discovery::RegisterResponse;
+using discovery::DiscoverRequest;
+using discovery::DiscoverResponse;
+using discovery::ListRequest;
+using discovery::ListResponse;
 using discovery::Empty;
 using discovery::StateRequest;
 using discovery::ServiceList;
@@ -52,25 +60,50 @@ class DiscoveryImpl final : public DiscoveryService::Service {
     return value;
   }
 
-  Status RegisterService(ServerContext* context, const RegistryEntry* entryIn,
-			 RegistryEntry* entryOut) override {
+  void clean() {
+    auto curr_time = static_cast<std::int64_t>(time(0));
+    for (std::map<std::string, RegistryEntry*>::iterator it=masterMap.begin(); it != masterMap.end(); ++it) {
+      if (curr_time - it->second->last_seen_time() > it->second->time_to_clean()) {
+	masterMap.erase(it->second->name());
+      }
+    }
+    
+    for (std::map<std::string, std::list<RegistryEntry*>>::iterator it = slaveMap.begin(); it != slaveMap.end(); ++it) {
+      for(std::list<RegistryEntry*>::iterator it2 = it->second.begin(); it2 != it->second.end();)
+	if (curr_time - (*it2)->last_seen_time() > (*it2)->time_to_clean()) {
+	  it->second.erase(it2);
+	} else {
+	  ++it2;
+	}
+    }
+  }
+
+  void cleanEntries() {
+    while (true) {
+      this->clean();
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    }
+  }
+
+  Status RegisterService(ServerContext* context, const RegisterRequest* entryIn,
+			 RegisterResponse* entryOut) override {
     // This server is already registered - update the last seen time
-    if (entryIn->port() > 0) {
-      if (entryIn->master()) {
-	RegistryEntry* entry = masterMap[entryIn->name()];
-	if (entry->ip() == entryIn->ip() && entry->port() == entryIn->port()) {
+    if (entryIn->service().port() > 0) {
+      if (entryIn->service().master()) {
+	RegistryEntry* entry = masterMap[entryIn->service().name()];
+	if (entry->ip() == entryIn->service().ip() && entry->port() == entryIn->service().port()) {
 	  entry->set_last_seen_time(static_cast<std::int64_t>(time(0)));
-	  entryOut = entry;
+	  entryOut->mutable_service()->CopyFrom(*entry);
 	  return Status::OK;
 	} else {
 	  return Status(grpc::INVALID_ARGUMENT, "There is already a master for this service");
 	}
       } else {
-	std::list<RegistryEntry*> entries = slaveMap[entryIn->name()];
+	std::list<RegistryEntry*> entries = slaveMap[entryIn->service().name()];
 	for (RegistryEntry* entry : entries) {
-	  if (entry->ip() == entryIn->ip() && entry->port() == entryIn->port()) {
+	  if (entry->ip() == entryIn->service().ip() && entry->port() == entryIn->service().port()) {
 	    entry->set_last_seen_time(static_cast<std::int64_t>(time(0)));
-	    entryOut = entry;
+	    entryOut->mutable_service()->CopyFrom(*entry);
 	    return Status::OK;
 	  }
 
@@ -80,27 +113,27 @@ class DiscoveryImpl final : public DiscoveryService::Service {
     }
 
     // This server is not registered
-    if (entryIn->master()) {
+    if (entryIn->service().master()) {
       return Status(grpc::INVALID_ARGUMENT, "Unable to register as master");
     }
 
-    int portNumber = entryIn->external_port() ? getExternalPort() : getInternalPort(entryIn->identifier());
+    int portNumber = entryIn->service().external_port() ? getExternalPort() : getInternalPort(entryIn->service().identifier());
 
     // Could we acquire a port
     if (portNumber < 0) {
       return Status(grpc::INTERNAL, "Unable to find a free port");
     }
 
-    entryOut->CopyFrom(*entryIn);
-    entryOut->set_register_time(static_cast<std::int64_t>(time(0)));
-    entryOut->set_port(portNumber); 
+    entryOut->mutable_service()->CopyFrom(entryIn->service());
+    entryOut->mutable_service()->set_register_time(static_cast<std::int64_t>(time(0)));
+    entryOut->mutable_service()->set_port(portNumber); 
 
     return Status::OK;
   }
 
-  Status Discover(ServerContext* context, const RegistryEntry* entryIn,
-		  RegistryEntry* entryOut) override {
-    entryOut = masterMap[entryIn->name()];
+  Status Discover(ServerContext* context, const DiscoverRequest* entryIn,
+		  DiscoverResponse* entryOut) override {
+    entryOut->mutable_service()->CopyFrom(*masterMap[entryIn->request().name()]);
     if (entryOut) {
       return Status::OK;
     }
@@ -108,16 +141,16 @@ class DiscoveryImpl final : public DiscoveryService::Service {
     return Status(grpc::INTERNAL, "Unable to locate master");
   }
 
-  Status ListAllServices(ServerContext* context, const Empty* empty,
-			 ServiceList* list) override {
+  Status ListAllServices(ServerContext* context, const ListRequest* empty,
+			 ListResponse* list) override {
     for (std::map<std::string, RegistryEntry*>::iterator it=masterMap.begin(); it != masterMap.end(); ++it) {
-      RegistryEntry* entry = list->add_services();
+      RegistryEntry* entry = list->mutable_services()->add_services();
       entry->MergeFrom(*it->second);
     }
 
     for (std::map<std::string, std::list<RegistryEntry*>>::iterator it = slaveMap.begin(); it != slaveMap.end(); ++it) {
       for(RegistryEntry* entry : it->second) {
-	RegistryEntry* tEntry = list->add_services();
+	RegistryEntry* tEntry = list->mutable_services()->add_services();
 	tEntry->MergeFrom(*entry);
       }
     }
@@ -140,6 +173,10 @@ void RunServer() {
   builder.RegisterService(&service);
   std::unique_ptr<Server> server(builder.BuildAndStart());
   std::cout << "Server listening on " << server_address << std::endl;
+
+  // Start the cleaner thread
+  std::thread cleaner(&DiscoveryImpl::cleanEntries, &service);
+
   server->Wait();
 }
 

@@ -1,25 +1,3 @@
-dist: trusty
+language: cpp
 
-sudo: required
-
-jdk:
-  - oraclejdk8
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - wget
-      - gcc-5
-      - g++-5
-
-before_install:
-  - sudo apt-get purge openjdk-9*
-  - sudo apt-get purge oracle-java9*
-  - wget 'https://github.com/bazelbuild/bazel/releases/download/0.9.0/bazel_0.9.0-linux-x86_64.deb'
-  - chmod +x bazel_0.9.0-linux-x86_64.deb
-  - sudo dpkg -i bazel_0.9.0-linux-x86_64.deb
-
-script:
- - bazel build :all
+script: make

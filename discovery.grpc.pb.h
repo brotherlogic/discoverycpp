@@ -33,26 +33,26 @@ class DiscoveryService final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status RegisterService(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::discovery::RegistryEntry* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>> AsyncRegisterService(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>>(AsyncRegisterServiceRaw(context, request, cq));
+    virtual ::grpc::Status RegisterService(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::discovery::RegisterResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegisterResponse>> AsyncRegisterService(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegisterResponse>>(AsyncRegisterServiceRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>> PrepareAsyncRegisterService(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>>(PrepareAsyncRegisterServiceRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegisterResponse>> PrepareAsyncRegisterService(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegisterResponse>>(PrepareAsyncRegisterServiceRaw(context, request, cq));
     }
-    virtual ::grpc::Status Discover(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::discovery::RegistryEntry* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>> AsyncDiscover(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>>(AsyncDiscoverRaw(context, request, cq));
+    virtual ::grpc::Status Discover(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::discovery::DiscoverResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::DiscoverResponse>> AsyncDiscover(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::DiscoverResponse>>(AsyncDiscoverRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>> PrepareAsyncDiscover(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>>(PrepareAsyncDiscoverRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::DiscoverResponse>> PrepareAsyncDiscover(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::DiscoverResponse>>(PrepareAsyncDiscoverRaw(context, request, cq));
     }
-    virtual ::grpc::Status ListAllServices(::grpc::ClientContext* context, const ::discovery::Empty& request, ::discovery::ServiceList* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ServiceList>> AsyncListAllServices(::grpc::ClientContext* context, const ::discovery::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ServiceList>>(AsyncListAllServicesRaw(context, request, cq));
+    virtual ::grpc::Status ListAllServices(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::discovery::ListResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ListResponse>> AsyncListAllServices(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ListResponse>>(AsyncListAllServicesRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ServiceList>> PrepareAsyncListAllServices(::grpc::ClientContext* context, const ::discovery::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ServiceList>>(PrepareAsyncListAllServicesRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ListResponse>> PrepareAsyncListAllServices(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ListResponse>>(PrepareAsyncListAllServicesRaw(context, request, cq));
     }
     virtual ::grpc::Status State(::grpc::ClientContext* context, const ::discovery::StateRequest& request, ::discovery::StateResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::StateResponse>> AsyncState(::grpc::ClientContext* context, const ::discovery::StateRequest& request, ::grpc::CompletionQueue* cq) {
@@ -62,38 +62,38 @@ class DiscoveryService final {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::discovery::StateResponse>>(PrepareAsyncStateRaw(context, request, cq));
     }
   private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>* AsyncRegisterServiceRaw(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>* PrepareAsyncRegisterServiceRaw(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>* AsyncDiscoverRaw(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegistryEntry>* PrepareAsyncDiscoverRaw(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ServiceList>* AsyncListAllServicesRaw(::grpc::ClientContext* context, const ::discovery::Empty& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ServiceList>* PrepareAsyncListAllServicesRaw(::grpc::ClientContext* context, const ::discovery::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegisterResponse>* AsyncRegisterServiceRaw(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::RegisterResponse>* PrepareAsyncRegisterServiceRaw(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::DiscoverResponse>* AsyncDiscoverRaw(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::DiscoverResponse>* PrepareAsyncDiscoverRaw(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ListResponse>* AsyncListAllServicesRaw(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::ListResponse>* PrepareAsyncListAllServicesRaw(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::StateResponse>* AsyncStateRaw(::grpc::ClientContext* context, const ::discovery::StateRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::discovery::StateResponse>* PrepareAsyncStateRaw(::grpc::ClientContext* context, const ::discovery::StateRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    ::grpc::Status RegisterService(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::discovery::RegistryEntry* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>> AsyncRegisterService(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>>(AsyncRegisterServiceRaw(context, request, cq));
+    ::grpc::Status RegisterService(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::discovery::RegisterResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegisterResponse>> AsyncRegisterService(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegisterResponse>>(AsyncRegisterServiceRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>> PrepareAsyncRegisterService(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>>(PrepareAsyncRegisterServiceRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegisterResponse>> PrepareAsyncRegisterService(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegisterResponse>>(PrepareAsyncRegisterServiceRaw(context, request, cq));
     }
-    ::grpc::Status Discover(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::discovery::RegistryEntry* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>> AsyncDiscover(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>>(AsyncDiscoverRaw(context, request, cq));
+    ::grpc::Status Discover(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::discovery::DiscoverResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::DiscoverResponse>> AsyncDiscover(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::DiscoverResponse>>(AsyncDiscoverRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>> PrepareAsyncDiscover(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>>(PrepareAsyncDiscoverRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::DiscoverResponse>> PrepareAsyncDiscover(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::DiscoverResponse>>(PrepareAsyncDiscoverRaw(context, request, cq));
     }
-    ::grpc::Status ListAllServices(::grpc::ClientContext* context, const ::discovery::Empty& request, ::discovery::ServiceList* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::ServiceList>> AsyncListAllServices(::grpc::ClientContext* context, const ::discovery::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::ServiceList>>(AsyncListAllServicesRaw(context, request, cq));
+    ::grpc::Status ListAllServices(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::discovery::ListResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::ListResponse>> AsyncListAllServices(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::ListResponse>>(AsyncListAllServicesRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::ServiceList>> PrepareAsyncListAllServices(::grpc::ClientContext* context, const ::discovery::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::ServiceList>>(PrepareAsyncListAllServicesRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::ListResponse>> PrepareAsyncListAllServices(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::ListResponse>>(PrepareAsyncListAllServicesRaw(context, request, cq));
     }
     ::grpc::Status State(::grpc::ClientContext* context, const ::discovery::StateRequest& request, ::discovery::StateResponse* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::discovery::StateResponse>> AsyncState(::grpc::ClientContext* context, const ::discovery::StateRequest& request, ::grpc::CompletionQueue* cq) {
@@ -105,12 +105,12 @@ class DiscoveryService final {
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
-    ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>* AsyncRegisterServiceRaw(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>* PrepareAsyncRegisterServiceRaw(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>* AsyncDiscoverRaw(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::discovery::RegistryEntry>* PrepareAsyncDiscoverRaw(::grpc::ClientContext* context, const ::discovery::RegistryEntry& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::discovery::ServiceList>* AsyncListAllServicesRaw(::grpc::ClientContext* context, const ::discovery::Empty& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::discovery::ServiceList>* PrepareAsyncListAllServicesRaw(::grpc::ClientContext* context, const ::discovery::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::discovery::RegisterResponse>* AsyncRegisterServiceRaw(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::discovery::RegisterResponse>* PrepareAsyncRegisterServiceRaw(::grpc::ClientContext* context, const ::discovery::RegisterRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::discovery::DiscoverResponse>* AsyncDiscoverRaw(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::discovery::DiscoverResponse>* PrepareAsyncDiscoverRaw(::grpc::ClientContext* context, const ::discovery::DiscoverRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::discovery::ListResponse>* AsyncListAllServicesRaw(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::discovery::ListResponse>* PrepareAsyncListAllServicesRaw(::grpc::ClientContext* context, const ::discovery::ListRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::discovery::StateResponse>* AsyncStateRaw(::grpc::ClientContext* context, const ::discovery::StateRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::discovery::StateResponse>* PrepareAsyncStateRaw(::grpc::ClientContext* context, const ::discovery::StateRequest& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_RegisterService_;
@@ -124,9 +124,9 @@ class DiscoveryService final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status RegisterService(::grpc::ServerContext* context, const ::discovery::RegistryEntry* request, ::discovery::RegistryEntry* response);
-    virtual ::grpc::Status Discover(::grpc::ServerContext* context, const ::discovery::RegistryEntry* request, ::discovery::RegistryEntry* response);
-    virtual ::grpc::Status ListAllServices(::grpc::ServerContext* context, const ::discovery::Empty* request, ::discovery::ServiceList* response);
+    virtual ::grpc::Status RegisterService(::grpc::ServerContext* context, const ::discovery::RegisterRequest* request, ::discovery::RegisterResponse* response);
+    virtual ::grpc::Status Discover(::grpc::ServerContext* context, const ::discovery::DiscoverRequest* request, ::discovery::DiscoverResponse* response);
+    virtual ::grpc::Status ListAllServices(::grpc::ServerContext* context, const ::discovery::ListRequest* request, ::discovery::ListResponse* response);
     virtual ::grpc::Status State(::grpc::ServerContext* context, const ::discovery::StateRequest* request, ::discovery::StateResponse* response);
   };
   template <class BaseClass>
@@ -141,11 +141,11 @@ class DiscoveryService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RegisterService(::grpc::ServerContext* context, const ::discovery::RegistryEntry* request, ::discovery::RegistryEntry* response) final override {
+    ::grpc::Status RegisterService(::grpc::ServerContext* context, const ::discovery::RegisterRequest* request, ::discovery::RegisterResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestRegisterService(::grpc::ServerContext* context, ::discovery::RegistryEntry* request, ::grpc::ServerAsyncResponseWriter< ::discovery::RegistryEntry>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestRegisterService(::grpc::ServerContext* context, ::discovery::RegisterRequest* request, ::grpc::ServerAsyncResponseWriter< ::discovery::RegisterResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -161,11 +161,11 @@ class DiscoveryService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Discover(::grpc::ServerContext* context, const ::discovery::RegistryEntry* request, ::discovery::RegistryEntry* response) final override {
+    ::grpc::Status Discover(::grpc::ServerContext* context, const ::discovery::DiscoverRequest* request, ::discovery::DiscoverResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestDiscover(::grpc::ServerContext* context, ::discovery::RegistryEntry* request, ::grpc::ServerAsyncResponseWriter< ::discovery::RegistryEntry>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestDiscover(::grpc::ServerContext* context, ::discovery::DiscoverRequest* request, ::grpc::ServerAsyncResponseWriter< ::discovery::DiscoverResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -181,11 +181,11 @@ class DiscoveryService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ListAllServices(::grpc::ServerContext* context, const ::discovery::Empty* request, ::discovery::ServiceList* response) final override {
+    ::grpc::Status ListAllServices(::grpc::ServerContext* context, const ::discovery::ListRequest* request, ::discovery::ListResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestListAllServices(::grpc::ServerContext* context, ::discovery::Empty* request, ::grpc::ServerAsyncResponseWriter< ::discovery::ServiceList>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestListAllServices(::grpc::ServerContext* context, ::discovery::ListRequest* request, ::grpc::ServerAsyncResponseWriter< ::discovery::ListResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -222,7 +222,7 @@ class DiscoveryService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RegisterService(::grpc::ServerContext* context, const ::discovery::RegistryEntry* request, ::discovery::RegistryEntry* response) final override {
+    ::grpc::Status RegisterService(::grpc::ServerContext* context, const ::discovery::RegisterRequest* request, ::discovery::RegisterResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -239,7 +239,7 @@ class DiscoveryService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Discover(::grpc::ServerContext* context, const ::discovery::RegistryEntry* request, ::discovery::RegistryEntry* response) final override {
+    ::grpc::Status Discover(::grpc::ServerContext* context, const ::discovery::DiscoverRequest* request, ::discovery::DiscoverResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -256,7 +256,7 @@ class DiscoveryService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status ListAllServices(::grpc::ServerContext* context, const ::discovery::Empty* request, ::discovery::ServiceList* response) final override {
+    ::grpc::Status ListAllServices(::grpc::ServerContext* context, const ::discovery::ListRequest* request, ::discovery::ListResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -285,18 +285,18 @@ class DiscoveryService final {
    public:
     WithStreamedUnaryMethod_RegisterService() {
       ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::internal::StreamedUnaryHandler< ::discovery::RegistryEntry, ::discovery::RegistryEntry>(std::bind(&WithStreamedUnaryMethod_RegisterService<BaseClass>::StreamedRegisterService, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::discovery::RegisterRequest, ::discovery::RegisterResponse>(std::bind(&WithStreamedUnaryMethod_RegisterService<BaseClass>::StreamedRegisterService, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_RegisterService() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status RegisterService(::grpc::ServerContext* context, const ::discovery::RegistryEntry* request, ::discovery::RegistryEntry* response) final override {
+    ::grpc::Status RegisterService(::grpc::ServerContext* context, const ::discovery::RegisterRequest* request, ::discovery::RegisterResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedRegisterService(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::discovery::RegistryEntry,::discovery::RegistryEntry>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedRegisterService(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::discovery::RegisterRequest,::discovery::RegisterResponse>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_Discover : public BaseClass {
@@ -305,18 +305,18 @@ class DiscoveryService final {
    public:
     WithStreamedUnaryMethod_Discover() {
       ::grpc::Service::MarkMethodStreamed(1,
-        new ::grpc::internal::StreamedUnaryHandler< ::discovery::RegistryEntry, ::discovery::RegistryEntry>(std::bind(&WithStreamedUnaryMethod_Discover<BaseClass>::StreamedDiscover, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::discovery::DiscoverRequest, ::discovery::DiscoverResponse>(std::bind(&WithStreamedUnaryMethod_Discover<BaseClass>::StreamedDiscover, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_Discover() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Discover(::grpc::ServerContext* context, const ::discovery::RegistryEntry* request, ::discovery::RegistryEntry* response) final override {
+    ::grpc::Status Discover(::grpc::ServerContext* context, const ::discovery::DiscoverRequest* request, ::discovery::DiscoverResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedDiscover(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::discovery::RegistryEntry,::discovery::RegistryEntry>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedDiscover(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::discovery::DiscoverRequest,::discovery::DiscoverResponse>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_ListAllServices : public BaseClass {
@@ -325,18 +325,18 @@ class DiscoveryService final {
    public:
     WithStreamedUnaryMethod_ListAllServices() {
       ::grpc::Service::MarkMethodStreamed(2,
-        new ::grpc::internal::StreamedUnaryHandler< ::discovery::Empty, ::discovery::ServiceList>(std::bind(&WithStreamedUnaryMethod_ListAllServices<BaseClass>::StreamedListAllServices, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler< ::discovery::ListRequest, ::discovery::ListResponse>(std::bind(&WithStreamedUnaryMethod_ListAllServices<BaseClass>::StreamedListAllServices, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_ListAllServices() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status ListAllServices(::grpc::ServerContext* context, const ::discovery::Empty* request, ::discovery::ServiceList* response) final override {
+    ::grpc::Status ListAllServices(::grpc::ServerContext* context, const ::discovery::ListRequest* request, ::discovery::ListResponse* response) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedListAllServices(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::discovery::Empty,::discovery::ServiceList>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedListAllServices(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::discovery::ListRequest,::discovery::ListResponse>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_State : public BaseClass {

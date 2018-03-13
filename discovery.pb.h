@@ -36,7 +36,7 @@ namespace protobuf_discovery_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[5];
+  static const ::google::protobuf::internal::ParseTable schema[11];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -52,18 +52,54 @@ void InitDefaultsStateResponseImpl();
 void InitDefaultsStateResponse();
 void InitDefaultsStateRequestImpl();
 void InitDefaultsStateRequest();
+void InitDefaultsRegisterRequestImpl();
+void InitDefaultsRegisterRequest();
+void InitDefaultsRegisterResponseImpl();
+void InitDefaultsRegisterResponse();
+void InitDefaultsDiscoverRequestImpl();
+void InitDefaultsDiscoverRequest();
+void InitDefaultsDiscoverResponseImpl();
+void InitDefaultsDiscoverResponse();
+void InitDefaultsListRequestImpl();
+void InitDefaultsListRequest();
+void InitDefaultsListResponseImpl();
+void InitDefaultsListResponse();
 inline void InitDefaults() {
   InitDefaultsRegistryEntry();
   InitDefaultsServiceList();
   InitDefaultsEmpty();
   InitDefaultsStateResponse();
   InitDefaultsStateRequest();
+  InitDefaultsRegisterRequest();
+  InitDefaultsRegisterResponse();
+  InitDefaultsDiscoverRequest();
+  InitDefaultsDiscoverResponse();
+  InitDefaultsListRequest();
+  InitDefaultsListResponse();
 }
 }  // namespace protobuf_discovery_2eproto
 namespace discovery {
+class DiscoverRequest;
+class DiscoverRequestDefaultTypeInternal;
+extern DiscoverRequestDefaultTypeInternal _DiscoverRequest_default_instance_;
+class DiscoverResponse;
+class DiscoverResponseDefaultTypeInternal;
+extern DiscoverResponseDefaultTypeInternal _DiscoverResponse_default_instance_;
 class Empty;
 class EmptyDefaultTypeInternal;
 extern EmptyDefaultTypeInternal _Empty_default_instance_;
+class ListRequest;
+class ListRequestDefaultTypeInternal;
+extern ListRequestDefaultTypeInternal _ListRequest_default_instance_;
+class ListResponse;
+class ListResponseDefaultTypeInternal;
+extern ListResponseDefaultTypeInternal _ListResponse_default_instance_;
+class RegisterRequest;
+class RegisterRequestDefaultTypeInternal;
+extern RegisterRequestDefaultTypeInternal _RegisterRequest_default_instance_;
+class RegisterResponse;
+class RegisterResponseDefaultTypeInternal;
+extern RegisterResponseDefaultTypeInternal _RegisterResponse_default_instance_;
 class RegistryEntry;
 class RegistryEntryDefaultTypeInternal;
 extern RegistryEntryDefaultTypeInternal _RegistryEntry_default_instance_;
@@ -675,6 +711,653 @@ class StateRequest : public ::google::protobuf::Message /* @@protoc_insertion_po
   friend struct ::protobuf_discovery_2eproto::TableStruct;
   friend void ::protobuf_discovery_2eproto::InitDefaultsStateRequestImpl();
 };
+// -------------------------------------------------------------------
+
+class RegisterRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:discovery.RegisterRequest) */ {
+ public:
+  RegisterRequest();
+  virtual ~RegisterRequest();
+
+  RegisterRequest(const RegisterRequest& from);
+
+  inline RegisterRequest& operator=(const RegisterRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  RegisterRequest(RegisterRequest&& from) noexcept
+    : RegisterRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline RegisterRequest& operator=(RegisterRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RegisterRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RegisterRequest* internal_default_instance() {
+    return reinterpret_cast<const RegisterRequest*>(
+               &_RegisterRequest_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    5;
+
+  void Swap(RegisterRequest* other);
+  friend void swap(RegisterRequest& a, RegisterRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RegisterRequest* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  RegisterRequest* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const RegisterRequest& from);
+  void MergeFrom(const RegisterRequest& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(RegisterRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string caller = 2;
+  void clear_caller();
+  static const int kCallerFieldNumber = 2;
+  const ::std::string& caller() const;
+  void set_caller(const ::std::string& value);
+  #if LANG_CXX11
+  void set_caller(::std::string&& value);
+  #endif
+  void set_caller(const char* value);
+  void set_caller(const char* value, size_t size);
+  ::std::string* mutable_caller();
+  ::std::string* release_caller();
+  void set_allocated_caller(::std::string* caller);
+
+  // .discovery.RegistryEntry service = 1;
+  bool has_service() const;
+  void clear_service();
+  static const int kServiceFieldNumber = 1;
+  const ::discovery::RegistryEntry& service() const;
+  ::discovery::RegistryEntry* release_service();
+  ::discovery::RegistryEntry* mutable_service();
+  void set_allocated_service(::discovery::RegistryEntry* service);
+
+  // @@protoc_insertion_point(class_scope:discovery.RegisterRequest)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr caller_;
+  ::discovery::RegistryEntry* service_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_discovery_2eproto::TableStruct;
+  friend void ::protobuf_discovery_2eproto::InitDefaultsRegisterRequestImpl();
+};
+// -------------------------------------------------------------------
+
+class RegisterResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:discovery.RegisterResponse) */ {
+ public:
+  RegisterResponse();
+  virtual ~RegisterResponse();
+
+  RegisterResponse(const RegisterResponse& from);
+
+  inline RegisterResponse& operator=(const RegisterResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  RegisterResponse(RegisterResponse&& from) noexcept
+    : RegisterResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline RegisterResponse& operator=(RegisterResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RegisterResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RegisterResponse* internal_default_instance() {
+    return reinterpret_cast<const RegisterResponse*>(
+               &_RegisterResponse_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    6;
+
+  void Swap(RegisterResponse* other);
+  friend void swap(RegisterResponse& a, RegisterResponse& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RegisterResponse* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  RegisterResponse* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const RegisterResponse& from);
+  void MergeFrom(const RegisterResponse& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(RegisterResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .discovery.RegistryEntry service = 1;
+  bool has_service() const;
+  void clear_service();
+  static const int kServiceFieldNumber = 1;
+  const ::discovery::RegistryEntry& service() const;
+  ::discovery::RegistryEntry* release_service();
+  ::discovery::RegistryEntry* mutable_service();
+  void set_allocated_service(::discovery::RegistryEntry* service);
+
+  // @@protoc_insertion_point(class_scope:discovery.RegisterResponse)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::discovery::RegistryEntry* service_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_discovery_2eproto::TableStruct;
+  friend void ::protobuf_discovery_2eproto::InitDefaultsRegisterResponseImpl();
+};
+// -------------------------------------------------------------------
+
+class DiscoverRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:discovery.DiscoverRequest) */ {
+ public:
+  DiscoverRequest();
+  virtual ~DiscoverRequest();
+
+  DiscoverRequest(const DiscoverRequest& from);
+
+  inline DiscoverRequest& operator=(const DiscoverRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  DiscoverRequest(DiscoverRequest&& from) noexcept
+    : DiscoverRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline DiscoverRequest& operator=(DiscoverRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const DiscoverRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const DiscoverRequest* internal_default_instance() {
+    return reinterpret_cast<const DiscoverRequest*>(
+               &_DiscoverRequest_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    7;
+
+  void Swap(DiscoverRequest* other);
+  friend void swap(DiscoverRequest& a, DiscoverRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline DiscoverRequest* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  DiscoverRequest* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const DiscoverRequest& from);
+  void MergeFrom(const DiscoverRequest& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(DiscoverRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string caller = 2;
+  void clear_caller();
+  static const int kCallerFieldNumber = 2;
+  const ::std::string& caller() const;
+  void set_caller(const ::std::string& value);
+  #if LANG_CXX11
+  void set_caller(::std::string&& value);
+  #endif
+  void set_caller(const char* value);
+  void set_caller(const char* value, size_t size);
+  ::std::string* mutable_caller();
+  ::std::string* release_caller();
+  void set_allocated_caller(::std::string* caller);
+
+  // .discovery.RegistryEntry request = 1;
+  bool has_request() const;
+  void clear_request();
+  static const int kRequestFieldNumber = 1;
+  const ::discovery::RegistryEntry& request() const;
+  ::discovery::RegistryEntry* release_request();
+  ::discovery::RegistryEntry* mutable_request();
+  void set_allocated_request(::discovery::RegistryEntry* request);
+
+  // @@protoc_insertion_point(class_scope:discovery.DiscoverRequest)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr caller_;
+  ::discovery::RegistryEntry* request_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_discovery_2eproto::TableStruct;
+  friend void ::protobuf_discovery_2eproto::InitDefaultsDiscoverRequestImpl();
+};
+// -------------------------------------------------------------------
+
+class DiscoverResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:discovery.DiscoverResponse) */ {
+ public:
+  DiscoverResponse();
+  virtual ~DiscoverResponse();
+
+  DiscoverResponse(const DiscoverResponse& from);
+
+  inline DiscoverResponse& operator=(const DiscoverResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  DiscoverResponse(DiscoverResponse&& from) noexcept
+    : DiscoverResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline DiscoverResponse& operator=(DiscoverResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const DiscoverResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const DiscoverResponse* internal_default_instance() {
+    return reinterpret_cast<const DiscoverResponse*>(
+               &_DiscoverResponse_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    8;
+
+  void Swap(DiscoverResponse* other);
+  friend void swap(DiscoverResponse& a, DiscoverResponse& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline DiscoverResponse* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  DiscoverResponse* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const DiscoverResponse& from);
+  void MergeFrom(const DiscoverResponse& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(DiscoverResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .discovery.RegistryEntry service = 1;
+  bool has_service() const;
+  void clear_service();
+  static const int kServiceFieldNumber = 1;
+  const ::discovery::RegistryEntry& service() const;
+  ::discovery::RegistryEntry* release_service();
+  ::discovery::RegistryEntry* mutable_service();
+  void set_allocated_service(::discovery::RegistryEntry* service);
+
+  // @@protoc_insertion_point(class_scope:discovery.DiscoverResponse)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::discovery::RegistryEntry* service_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_discovery_2eproto::TableStruct;
+  friend void ::protobuf_discovery_2eproto::InitDefaultsDiscoverResponseImpl();
+};
+// -------------------------------------------------------------------
+
+class ListRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:discovery.ListRequest) */ {
+ public:
+  ListRequest();
+  virtual ~ListRequest();
+
+  ListRequest(const ListRequest& from);
+
+  inline ListRequest& operator=(const ListRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ListRequest(ListRequest&& from) noexcept
+    : ListRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline ListRequest& operator=(ListRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ListRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ListRequest* internal_default_instance() {
+    return reinterpret_cast<const ListRequest*>(
+               &_ListRequest_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    9;
+
+  void Swap(ListRequest* other);
+  friend void swap(ListRequest& a, ListRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ListRequest* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  ListRequest* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const ListRequest& from);
+  void MergeFrom(const ListRequest& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(ListRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string caller = 1;
+  void clear_caller();
+  static const int kCallerFieldNumber = 1;
+  const ::std::string& caller() const;
+  void set_caller(const ::std::string& value);
+  #if LANG_CXX11
+  void set_caller(::std::string&& value);
+  #endif
+  void set_caller(const char* value);
+  void set_caller(const char* value, size_t size);
+  ::std::string* mutable_caller();
+  ::std::string* release_caller();
+  void set_allocated_caller(::std::string* caller);
+
+  // @@protoc_insertion_point(class_scope:discovery.ListRequest)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr caller_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_discovery_2eproto::TableStruct;
+  friend void ::protobuf_discovery_2eproto::InitDefaultsListRequestImpl();
+};
+// -------------------------------------------------------------------
+
+class ListResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:discovery.ListResponse) */ {
+ public:
+  ListResponse();
+  virtual ~ListResponse();
+
+  ListResponse(const ListResponse& from);
+
+  inline ListResponse& operator=(const ListResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ListResponse(ListResponse&& from) noexcept
+    : ListResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline ListResponse& operator=(ListResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ListResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ListResponse* internal_default_instance() {
+    return reinterpret_cast<const ListResponse*>(
+               &_ListResponse_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    10;
+
+  void Swap(ListResponse* other);
+  friend void swap(ListResponse& a, ListResponse& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ListResponse* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  ListResponse* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const ListResponse& from);
+  void MergeFrom(const ListResponse& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(ListResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .discovery.ServiceList services = 1;
+  bool has_services() const;
+  void clear_services();
+  static const int kServicesFieldNumber = 1;
+  const ::discovery::ServiceList& services() const;
+  ::discovery::ServiceList* release_services();
+  ::discovery::ServiceList* mutable_services();
+  void set_allocated_services(::discovery::ServiceList* services);
+
+  // @@protoc_insertion_point(class_scope:discovery.ListResponse)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::discovery::ServiceList* services_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_discovery_2eproto::TableStruct;
+  friend void ::protobuf_discovery_2eproto::InitDefaultsListResponseImpl();
+};
 // ===================================================================
 
 
@@ -1070,9 +1753,454 @@ inline void StateResponse::set_len(::google::protobuf::int32 value) {
 
 // StateRequest
 
+// -------------------------------------------------------------------
+
+// RegisterRequest
+
+// .discovery.RegistryEntry service = 1;
+inline bool RegisterRequest::has_service() const {
+  return this != internal_default_instance() && service_ != NULL;
+}
+inline void RegisterRequest::clear_service() {
+  if (GetArenaNoVirtual() == NULL && service_ != NULL) {
+    delete service_;
+  }
+  service_ = NULL;
+}
+inline const ::discovery::RegistryEntry& RegisterRequest::service() const {
+  const ::discovery::RegistryEntry* p = service_;
+  // @@protoc_insertion_point(field_get:discovery.RegisterRequest.service)
+  return p != NULL ? *p : *reinterpret_cast<const ::discovery::RegistryEntry*>(
+      &::discovery::_RegistryEntry_default_instance_);
+}
+inline ::discovery::RegistryEntry* RegisterRequest::release_service() {
+  // @@protoc_insertion_point(field_release:discovery.RegisterRequest.service)
+  
+  ::discovery::RegistryEntry* temp = service_;
+  service_ = NULL;
+  return temp;
+}
+inline ::discovery::RegistryEntry* RegisterRequest::mutable_service() {
+  
+  if (service_ == NULL) {
+    service_ = new ::discovery::RegistryEntry;
+  }
+  // @@protoc_insertion_point(field_mutable:discovery.RegisterRequest.service)
+  return service_;
+}
+inline void RegisterRequest::set_allocated_service(::discovery::RegistryEntry* service) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete service_;
+  }
+  if (service) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      service = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, service, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  service_ = service;
+  // @@protoc_insertion_point(field_set_allocated:discovery.RegisterRequest.service)
+}
+
+// string caller = 2;
+inline void RegisterRequest::clear_caller() {
+  caller_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& RegisterRequest::caller() const {
+  // @@protoc_insertion_point(field_get:discovery.RegisterRequest.caller)
+  return caller_.GetNoArena();
+}
+inline void RegisterRequest::set_caller(const ::std::string& value) {
+  
+  caller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:discovery.RegisterRequest.caller)
+}
+#if LANG_CXX11
+inline void RegisterRequest::set_caller(::std::string&& value) {
+  
+  caller_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:discovery.RegisterRequest.caller)
+}
+#endif
+inline void RegisterRequest::set_caller(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  caller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:discovery.RegisterRequest.caller)
+}
+inline void RegisterRequest::set_caller(const char* value, size_t size) {
+  
+  caller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:discovery.RegisterRequest.caller)
+}
+inline ::std::string* RegisterRequest::mutable_caller() {
+  
+  // @@protoc_insertion_point(field_mutable:discovery.RegisterRequest.caller)
+  return caller_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RegisterRequest::release_caller() {
+  // @@protoc_insertion_point(field_release:discovery.RegisterRequest.caller)
+  
+  return caller_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RegisterRequest::set_allocated_caller(::std::string* caller) {
+  if (caller != NULL) {
+    
+  } else {
+    
+  }
+  caller_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), caller);
+  // @@protoc_insertion_point(field_set_allocated:discovery.RegisterRequest.caller)
+}
+
+// -------------------------------------------------------------------
+
+// RegisterResponse
+
+// .discovery.RegistryEntry service = 1;
+inline bool RegisterResponse::has_service() const {
+  return this != internal_default_instance() && service_ != NULL;
+}
+inline void RegisterResponse::clear_service() {
+  if (GetArenaNoVirtual() == NULL && service_ != NULL) {
+    delete service_;
+  }
+  service_ = NULL;
+}
+inline const ::discovery::RegistryEntry& RegisterResponse::service() const {
+  const ::discovery::RegistryEntry* p = service_;
+  // @@protoc_insertion_point(field_get:discovery.RegisterResponse.service)
+  return p != NULL ? *p : *reinterpret_cast<const ::discovery::RegistryEntry*>(
+      &::discovery::_RegistryEntry_default_instance_);
+}
+inline ::discovery::RegistryEntry* RegisterResponse::release_service() {
+  // @@protoc_insertion_point(field_release:discovery.RegisterResponse.service)
+  
+  ::discovery::RegistryEntry* temp = service_;
+  service_ = NULL;
+  return temp;
+}
+inline ::discovery::RegistryEntry* RegisterResponse::mutable_service() {
+  
+  if (service_ == NULL) {
+    service_ = new ::discovery::RegistryEntry;
+  }
+  // @@protoc_insertion_point(field_mutable:discovery.RegisterResponse.service)
+  return service_;
+}
+inline void RegisterResponse::set_allocated_service(::discovery::RegistryEntry* service) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete service_;
+  }
+  if (service) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      service = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, service, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  service_ = service;
+  // @@protoc_insertion_point(field_set_allocated:discovery.RegisterResponse.service)
+}
+
+// -------------------------------------------------------------------
+
+// DiscoverRequest
+
+// .discovery.RegistryEntry request = 1;
+inline bool DiscoverRequest::has_request() const {
+  return this != internal_default_instance() && request_ != NULL;
+}
+inline void DiscoverRequest::clear_request() {
+  if (GetArenaNoVirtual() == NULL && request_ != NULL) {
+    delete request_;
+  }
+  request_ = NULL;
+}
+inline const ::discovery::RegistryEntry& DiscoverRequest::request() const {
+  const ::discovery::RegistryEntry* p = request_;
+  // @@protoc_insertion_point(field_get:discovery.DiscoverRequest.request)
+  return p != NULL ? *p : *reinterpret_cast<const ::discovery::RegistryEntry*>(
+      &::discovery::_RegistryEntry_default_instance_);
+}
+inline ::discovery::RegistryEntry* DiscoverRequest::release_request() {
+  // @@protoc_insertion_point(field_release:discovery.DiscoverRequest.request)
+  
+  ::discovery::RegistryEntry* temp = request_;
+  request_ = NULL;
+  return temp;
+}
+inline ::discovery::RegistryEntry* DiscoverRequest::mutable_request() {
+  
+  if (request_ == NULL) {
+    request_ = new ::discovery::RegistryEntry;
+  }
+  // @@protoc_insertion_point(field_mutable:discovery.DiscoverRequest.request)
+  return request_;
+}
+inline void DiscoverRequest::set_allocated_request(::discovery::RegistryEntry* request) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete request_;
+  }
+  if (request) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      request = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, request, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  request_ = request;
+  // @@protoc_insertion_point(field_set_allocated:discovery.DiscoverRequest.request)
+}
+
+// string caller = 2;
+inline void DiscoverRequest::clear_caller() {
+  caller_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& DiscoverRequest::caller() const {
+  // @@protoc_insertion_point(field_get:discovery.DiscoverRequest.caller)
+  return caller_.GetNoArena();
+}
+inline void DiscoverRequest::set_caller(const ::std::string& value) {
+  
+  caller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:discovery.DiscoverRequest.caller)
+}
+#if LANG_CXX11
+inline void DiscoverRequest::set_caller(::std::string&& value) {
+  
+  caller_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:discovery.DiscoverRequest.caller)
+}
+#endif
+inline void DiscoverRequest::set_caller(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  caller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:discovery.DiscoverRequest.caller)
+}
+inline void DiscoverRequest::set_caller(const char* value, size_t size) {
+  
+  caller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:discovery.DiscoverRequest.caller)
+}
+inline ::std::string* DiscoverRequest::mutable_caller() {
+  
+  // @@protoc_insertion_point(field_mutable:discovery.DiscoverRequest.caller)
+  return caller_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* DiscoverRequest::release_caller() {
+  // @@protoc_insertion_point(field_release:discovery.DiscoverRequest.caller)
+  
+  return caller_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void DiscoverRequest::set_allocated_caller(::std::string* caller) {
+  if (caller != NULL) {
+    
+  } else {
+    
+  }
+  caller_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), caller);
+  // @@protoc_insertion_point(field_set_allocated:discovery.DiscoverRequest.caller)
+}
+
+// -------------------------------------------------------------------
+
+// DiscoverResponse
+
+// .discovery.RegistryEntry service = 1;
+inline bool DiscoverResponse::has_service() const {
+  return this != internal_default_instance() && service_ != NULL;
+}
+inline void DiscoverResponse::clear_service() {
+  if (GetArenaNoVirtual() == NULL && service_ != NULL) {
+    delete service_;
+  }
+  service_ = NULL;
+}
+inline const ::discovery::RegistryEntry& DiscoverResponse::service() const {
+  const ::discovery::RegistryEntry* p = service_;
+  // @@protoc_insertion_point(field_get:discovery.DiscoverResponse.service)
+  return p != NULL ? *p : *reinterpret_cast<const ::discovery::RegistryEntry*>(
+      &::discovery::_RegistryEntry_default_instance_);
+}
+inline ::discovery::RegistryEntry* DiscoverResponse::release_service() {
+  // @@protoc_insertion_point(field_release:discovery.DiscoverResponse.service)
+  
+  ::discovery::RegistryEntry* temp = service_;
+  service_ = NULL;
+  return temp;
+}
+inline ::discovery::RegistryEntry* DiscoverResponse::mutable_service() {
+  
+  if (service_ == NULL) {
+    service_ = new ::discovery::RegistryEntry;
+  }
+  // @@protoc_insertion_point(field_mutable:discovery.DiscoverResponse.service)
+  return service_;
+}
+inline void DiscoverResponse::set_allocated_service(::discovery::RegistryEntry* service) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete service_;
+  }
+  if (service) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      service = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, service, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  service_ = service;
+  // @@protoc_insertion_point(field_set_allocated:discovery.DiscoverResponse.service)
+}
+
+// -------------------------------------------------------------------
+
+// ListRequest
+
+// string caller = 1;
+inline void ListRequest::clear_caller() {
+  caller_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ListRequest::caller() const {
+  // @@protoc_insertion_point(field_get:discovery.ListRequest.caller)
+  return caller_.GetNoArena();
+}
+inline void ListRequest::set_caller(const ::std::string& value) {
+  
+  caller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:discovery.ListRequest.caller)
+}
+#if LANG_CXX11
+inline void ListRequest::set_caller(::std::string&& value) {
+  
+  caller_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:discovery.ListRequest.caller)
+}
+#endif
+inline void ListRequest::set_caller(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  caller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:discovery.ListRequest.caller)
+}
+inline void ListRequest::set_caller(const char* value, size_t size) {
+  
+  caller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:discovery.ListRequest.caller)
+}
+inline ::std::string* ListRequest::mutable_caller() {
+  
+  // @@protoc_insertion_point(field_mutable:discovery.ListRequest.caller)
+  return caller_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ListRequest::release_caller() {
+  // @@protoc_insertion_point(field_release:discovery.ListRequest.caller)
+  
+  return caller_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ListRequest::set_allocated_caller(::std::string* caller) {
+  if (caller != NULL) {
+    
+  } else {
+    
+  }
+  caller_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), caller);
+  // @@protoc_insertion_point(field_set_allocated:discovery.ListRequest.caller)
+}
+
+// -------------------------------------------------------------------
+
+// ListResponse
+
+// .discovery.ServiceList services = 1;
+inline bool ListResponse::has_services() const {
+  return this != internal_default_instance() && services_ != NULL;
+}
+inline void ListResponse::clear_services() {
+  if (GetArenaNoVirtual() == NULL && services_ != NULL) {
+    delete services_;
+  }
+  services_ = NULL;
+}
+inline const ::discovery::ServiceList& ListResponse::services() const {
+  const ::discovery::ServiceList* p = services_;
+  // @@protoc_insertion_point(field_get:discovery.ListResponse.services)
+  return p != NULL ? *p : *reinterpret_cast<const ::discovery::ServiceList*>(
+      &::discovery::_ServiceList_default_instance_);
+}
+inline ::discovery::ServiceList* ListResponse::release_services() {
+  // @@protoc_insertion_point(field_release:discovery.ListResponse.services)
+  
+  ::discovery::ServiceList* temp = services_;
+  services_ = NULL;
+  return temp;
+}
+inline ::discovery::ServiceList* ListResponse::mutable_services() {
+  
+  if (services_ == NULL) {
+    services_ = new ::discovery::ServiceList;
+  }
+  // @@protoc_insertion_point(field_mutable:discovery.ListResponse.services)
+  return services_;
+}
+inline void ListResponse::set_allocated_services(::discovery::ServiceList* services) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete services_;
+  }
+  if (services) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      services = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, services, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  services_ = services;
+  // @@protoc_insertion_point(field_set_allocated:discovery.ListResponse.services)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
